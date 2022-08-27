@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-app
+  name: hello-app-dev
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: hello-app
+      app: hello-app-dev
   template:
     metadata:
       labels:
-        app: hello-app
+        app: hello-app-dev
         visualize: "true"
     spec:
       containers:
-      - name: hello-app-pod
+      - name: hello-app-dev-pod
         image: mtararujs/hello-app
         ports:
         - containerPort: 8080
@@ -24,10 +24,10 @@ kind: Service
 metadata:
   labels:
     visualize: "true"
-  name: hello-app-service
+  name: hello-app-dev-service
 spec:
   selector:
-    app: hello-app
+    app: hello-app-dev
   ports:
   - name: http
     protocol: TCP
