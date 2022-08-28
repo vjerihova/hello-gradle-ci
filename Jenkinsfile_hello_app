@@ -16,17 +16,17 @@ pipeline {
             }
         }
         stage('test-dev') {
-            sxript {
+            script {
                 test("DEV")
             }
         }
         stage('deploy-prd') {
-            steps {
+            script {
                 deploy("PRD")
             }
         }
         stage('test-prd') {
-            steps {
+            script {
                 test("PRD")
             }
         }        
