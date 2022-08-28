@@ -11,24 +11,32 @@ pipeline {
             }
         }
         stage('deploy-dev') {
-            steps {
-                echo "Deploy hello-app to dev"
+            script {
+                deploy("DEV")
             }
         }
         stage('test-dev') {
-            steps {
-                echo "Test hello-app"
+            sxript {
+                test("DEV")
             }
         }
         stage('deploy-prd') {
             steps {
-                echo "Deploy hello-app tp prd"
+                deploy("PRD")
             }
         }
         stage('test-prd') {
             steps {
-                echo "Test hello-app"
+                test("PRD")
             }
         }        
     }
+}
+
+def deploy(String environment){
+    echo "Deploymment of hello-appp to ${environment}"
+}
+
+def test(String environment){
+    echo "Testing of hello-appp to ${environment}"
 }
