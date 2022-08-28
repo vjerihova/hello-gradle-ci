@@ -56,6 +56,13 @@ def test(String environment){
     finally {
         sh "docker cp api_test_executer_${environment}:/usr/src/api-tests/test-output/report.html report_${environment}.html"
         sh "docker rm -f api_test_executer_${environment}"
-        sh "docker run --network=host --rm --name api_dev_tests --entrypoint=cucumber vjerihova/ubuntu_ruby_executer:latest"
+        publishHTML([
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: false, reportDir: '',
+            reportFiles: "report_${environment}.html",
+            reportName: "Test report ${environment}",
+            reportTitles: ''
+        ])
     }
 }
