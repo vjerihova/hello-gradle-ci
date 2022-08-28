@@ -16,3 +16,35 @@ pipelines:
                   command: echo
                   arguments: 
                   - "Building hello app"
+      - deploy-dev:
+          jobs:
+            deploy-dev:
+              tasks:
+              - exec:
+                  command: echo
+                  arguments: 
+                  - "Deploy of hello-app on DEV"
+      - test-dev:
+          jobs:
+            test-dev:
+              tasks:
+              - exec:
+                  command: echo
+                  arguments: 
+                  - "Test of hello-app on DEV"
+      - deploy-prd:
+          jobs:
+            deploy-prd:
+              tasks:
+              - exec:
+                  command: echo
+                  arguments: 
+                  - "Deploy of hello-app on PRD"
+      - test-prd:
+          jobs:
+            test-prd:
+              tasks:
+              - exec:
+                  command: echo
+                  arguments: 
+                  - "Test of hello-app on PRD"
