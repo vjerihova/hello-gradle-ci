@@ -14,7 +14,7 @@ pipeline {
         stage('deploy-dev') {
             steps {
                 script {
-                    deploy("DEV")
+                    deploy("dev")
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
         stage('deploy-prd') {
             steps {
                 script {
-                    deploy("PRD")
+                    deploy("prd")
                 }
             }
         }
@@ -43,7 +43,8 @@ pipeline {
 }
 
 def deploy(String environment){
-    echo "Deploymment of hello-app to ${environment}"
+    echo "Deploymment of hello-app to ${environment} is starting"
+    sh "kubectl set image deployment hello-app-${environment} hello-app-${environment}-pod=vjerihova/hello-app:latest"
 }
 
 def test(String environment){
