@@ -6,38 +6,38 @@ common:
         command: bash
         arguments: 
           - -c 
-          - echo "Deploy of hello-app on ${ENV_NAME}"
+          - echo "Deploy of hello-app on $ENV_NAME"
     - exec:
         command: bash
         arguments:
           - -c
-          - kubectl set image deployment hello-app-${ENV_NAME} hello-app-${ENV_NAME}-pod=vjerihova/hello-app:latest
+          - kubectl set image deployment hello-app-$ENV_NAME hello-app-$ENV_NAME-pod=vjerihova/hello-app:latest
   test-tasks: &test-tasks
     - exec:
         command: bash
         arguments: 
           - -c
-          - echo "Test of hello-app on ${ENV_NAME}"
+          - echo "Test of hello-app on $ENV_NAME"
     - exec:
         command: bash
         arguments: 
           - -c
-          - docker run --network=host -d -t --name api_test_executer_${ENV_NAME} vjerihova/ubuntu_ruby_executer:latest
+          - docker run --network=host -d -t --name api_test_executer_$ENV_NAME vjerihova/ubuntu_ruby_executer:latest
     - exec:
         command: bash
         arguments: 
           - -c
-          - docker exec api_test_executer_${ENV_NAME} cucumber PLATFORM=${ENV_NAME} --format progress -c --format html --out test-output/report.html
+          - docker exec api_test_executer_$ENV_NAME cucumber PLATFORM=$ENV_NAME --format progress -c --format html --out test-output/report.html
     - exec:
         command: bash
         arguments: 
           - -c
-          - docker cp api_test_executer_${ENV_NAME}:/usr/src/api-tests/test-output/report.html report_${ENV_NAME}.html
+          - docker cp api_test_executer_$ENV_NAME:/usr/src/api-tests/test-output/report.html report_$ENV_NAME.html
     - exec:
         command: bash
         arguments: 
           - -c
-          - docker rm -f api_test_executer_${ENV_NAME}
+          - docker rm -f api_test_executer_$ENV_NAME
 pipelines:
   hello-app:
     group: java-spring-apps
@@ -75,6 +75,12 @@ pipelines:
             ENV_NAME: dev
           jobs:
             test-dev:
+              artifacts:
+                - build:
+                    source: report_dev.html
+                    destination: test-output
+              tabs:
+                Report: test-output/report_dev.html
               tasks: *test-tasks
       - deploy-prd:
           environment_variables:
@@ -87,4 +93,10 @@ pipelines:
             ENV_NAME: prd
           jobs:
             test-prd:
+              artifacts:
+                - build:
+                    source: report_prd.html
+                    destination: test-output
+              tabs:
+                Report: test-output/report_prd.html
               tasks: *test-tasks
