@@ -25,20 +25,20 @@ pipelines:
           jobs:
             build-app:
               tasks:
-              - exec:
-                  command: echo
-                  arguments: 
-                  - "Building hello app"
-              - exec:
-                  command: bash
-                  arrguments:
-                  - -c 
-                  - docker build -t vjerihova/hello-app:latest .
-              - exec:
-                  command: bash
-                  arrguments:
-                  - -c 
-                  - docker push vjerihova/hello-app:latest          
+                - exec:
+                    command: echo
+                    arguments: 
+                    - "Building hello app"
+                - exec:
+                    command: bash
+                    arrguments:
+                    - -c 
+                    - docker build -t vjerihova/hello-app:latest .
+                - exec:
+                    command: bash
+                    arrguments:
+                    - -c 
+                    - docker push vjerihova/hello-app:latest          
       - deploy-dev:
           environment_variables:
             ENV_NAME: dev
