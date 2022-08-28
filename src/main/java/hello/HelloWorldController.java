@@ -8,7 +8,7 @@ public class HelloWorldController {
 
     @RequestMapping("/greetings")
     public String index() {
-        return "Welcome to CI/CD + Docker Course!";
+        return "New message !!!";
     }
 
 }
