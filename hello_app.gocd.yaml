@@ -1,5 +1,16 @@
 ---
 format_version: 10
+common:
+  deploy-tasks: &deploy-tasks
+    - exec:
+      command: echo
+      arguments: 
+      - "Deploy of hello-app on ${ENV_NAME}"
+  test-tasks: &test-tasks
+    - exec:
+      command: echo
+      arguments: 
+      - "Test of hello-app on ${ENV_NAME}"
 pipelines:
   hello-app:
     group: java-spring-apps
@@ -17,34 +28,26 @@ pipelines:
                   arguments: 
                   - "Building hello app"
       - deploy-dev:
+          environment_variables:
+            ENV_NAME: dev
           jobs:
             deploy-dev:
-              tasks:
-              - exec:
-                  command: echo
-                  arguments: 
-                  - "Deploy of hello-app on DEV"
+              tasks: *deploy-tasks
       - test-dev:
+          environment_variables:
+            ENV_NAME: dev
           jobs:
             test-dev:
-              tasks:
-              - exec:
-                  command: echo
-                  arguments: 
-                  - "Test of hello-app on DEV"
+              tasks: *test-tasks
       - deploy-prd:
+          environment_variables:
+            ENV_NAME: prd
           jobs:
             deploy-prd:
-              tasks:
-              - exec:
-                  command: echo
-                  arguments: 
-                  - "Deploy of hello-app on PRD"
+              tasks: *deploy-tasks
       - test-prd:
+          environment_variables:
+            ENV_NAME: prd
           jobs:
             test-prd:
-              tasks:
-              - exec:
-                  command: echo
-                  arguments: 
-                  - "Test of hello-app on PRD"
+              tasks: *test-tasks
