@@ -7,7 +7,8 @@ pipeline {
     stages {
         stage('build-app') {
             steps {
-                echo "Build app"
+                sh "docker build -t vjerihova/hello-app:latest ."
+                sh "docker push vjerihova/hello-app:latest"
             }
         }
         stage('deploy-dev') {
@@ -42,9 +43,9 @@ pipeline {
 }
 
 def deploy(String environment){
-    echo "Deploymment of hello-appp to ${environment}"
+    echo "Deploymment of hello-app to ${environment}"
 }
 
 def test(String environment){
-    echo "Testing of hello-appp to ${environment}"
+    echo "Testing of hello-app to ${environment}"
 }
