@@ -3,14 +3,16 @@ format_version: 10
 common:
   deploy-tasks: &deploy-tasks
     - exec:
-        command: echo
+        command: bash
         arguments: 
-        - "Deploy of hello-app on ${ENV_NAME}"
+        - -c 
+        - echo "Deploy of hello-app on ${ENV_NAME}"
   test-tasks: &test-tasks
     - exec:
-        command: echo
+        command: bash
         arguments: 
-        - "Test of hello-app on ${ENV_NAME}"
+        - -c
+        - echo "Test of hello-app on ${ENV_NAME}"
 pipelines:
   hello-app:
     group: java-spring-apps
@@ -27,6 +29,16 @@ pipelines:
                   command: echo
                   arguments: 
                   - "Building hello app"
+              - exec:
+                  command: bash
+                  arrguments:
+                  - -c 
+                  - docker build -t vjerihova/hello-app:latest .
+              - exec:
+                  command: bash
+                  arrguments:
+                  - -c 
+                  - docker push vjerihova/hello-app:latest          
       - deploy-dev:
           environment_variables:
             ENV_NAME: dev
