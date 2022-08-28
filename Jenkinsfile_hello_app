@@ -51,7 +51,7 @@ def test(String environment){
     echo "Testing of hello-app to ${environment}"
     sh "docker run --network=host -d -t --name api_test_executor_${environment} vjerihova/ubuntu_ruby_executer:latest"
     try {
-        sh "docker exec api_test_executer_${environment} cucumber PLATFORM=${environment} --format progress -c --format html --out test-output/report_$(date +%T).html"
+        sh "docker exec api_test_executer_${environment} cucumber PLATFORM=${environment} --format progress -c --format html --out test-output/report.html"
     }
     finally {
         sh "docker cp api_test_executer_${environment}:/usr/src/api-tests/test-output/report.html report_${environment}.html"
