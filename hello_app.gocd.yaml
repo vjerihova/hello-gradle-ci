@@ -29,11 +29,13 @@ common:
           - -c
           - docker exec api_test_executer_$ENV_NAME cucumber PLATFORM=$ENV_NAME --format progress -c --format html --out test-output/report.html
     - exec:
+        run_if: any
         command: bash
         arguments: 
           - -c
           - docker cp api_test_executer_$ENV_NAME:/usr/src/api-tests/test-output/report.html report_$ENV_NAME.html
     - exec:
+        run_if: any
         command: bash
         arguments: 
           - -c
