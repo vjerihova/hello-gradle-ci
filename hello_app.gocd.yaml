@@ -11,7 +11,7 @@ common:
         command: bash
         arguments:
           - -c
-          - kubectl set image deployment hello-app-$ENV_NAME hello-app-$ENV_NAME-pod=vjerihova/hello-app:latest
+          - kubectl set image deployment hello-app-$ENV_NAME hello-app-$ENV_NAME-pod=vjerihova/hello-app:$GO_REVISION_MYGIT
   test-tasks: &test-tasks
     - exec:
         command: bash
@@ -22,7 +22,7 @@ common:
         command: bash
         arguments: 
           - -c
-          - docker run --network=host -d -t --name api_test_executer_$ENV_NAME vjerihova/ubuntu_ruby_executer:latest
+          - docker run --network=host -d -t --name api_test_executer_$ENV_NAME vjerihova/ubuntu_ruby_executer:$GO_REVISION_MYGIT
     - exec:
         command: bash
         arguments: 
@@ -60,12 +60,12 @@ pipelines:
                     command: bash
                     arguments:
                       - -c 
-                      - docker build -t vjerihova/hello-app:latest .
+                      - docker build -t vjerihova/hello-app:$GO_REVISION_MYGIT .
                 - exec:
                     command: bash
                     arguments:
                       - -c 
-                      - docker push vjerihova/hello-app:latest          
+                      - docker push vjerihova/hello-app:$GO_REVISION_MYGIT          
       - deploy-dev:
           environment_variables:
             ENV_NAME: dev
