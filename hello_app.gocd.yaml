@@ -22,7 +22,7 @@ common:
         command: bash
         arguments: 
           - -c
-          - docker run --network=host -d -t --name api_test_executer_$ENV_NAME vjerihova/ubuntu_ruby_executer:$GO_REVISION_MYGIT
+          - docker run --network=host -d -t --name api_test_executer_$ENV_NAME vjerihova/ubuntu_ruby_executer:latest
     - exec:
         command: bash
         arguments: 
