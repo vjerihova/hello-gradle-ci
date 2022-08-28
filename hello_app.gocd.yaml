@@ -53,15 +53,15 @@ pipelines:
                 - exec:
                     command: echo
                     arguments: 
-                    - "Building hello app"
+                      - "Building hello app"
                 - exec:
                     command: bash
-                    arrguments:
+                    arguments:
                       - -c 
                       - docker build -t vjerihova/hello-app:latest .
                 - exec:
                     command: bash
-                    arrguments:
+                    arguments:
                       - -c 
                       - docker push vjerihova/hello-app:latest          
       - deploy-dev:
