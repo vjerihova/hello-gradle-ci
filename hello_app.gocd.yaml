@@ -28,9 +28,9 @@ pipelines:
                   arguments: 
                   - "Building hello app"
       - deploy-dev:
-          environment_variables:
-            ENV_NAME: dev
           jobs:
+            environment_variables:
+              ENV_NAME: dev
             deploy-dev:
               tasks: *deploy-tasks
       - test-dev:
