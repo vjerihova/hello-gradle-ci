@@ -11,23 +11,31 @@ pipeline {
             }
         }
         stage('deploy-dev') {
-            script {
-                deploy("DEV")
+            steps {
+                script {
+                    deploy("DEV")
+                }
             }
         }
         stage('test-dev') {
-            script {
-                test("DEV")
+            steps {
+                script {
+                    test("DEV")
+                }
             }
         }
         stage('deploy-prd') {
-            script {
-                deploy("PRD")
+            steps {
+                script {
+                    deploy("PRD")
+                }
             }
         }
         stage('test-prd') {
-            script {
-                test("PRD")
+            steps {
+                script {
+                    test("PRD")
+                }
             }
         }        
     }
