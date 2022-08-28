@@ -59,7 +59,7 @@ def test(String environment){
         publishHTML([
             allowMissing: false,
             alwaysLinkToLastBuild: true,
-            keepAll: false, reportDir: '',
+            keepAll: true, reportDir: '',
             reportFiles: "report_${environment}.html",
             reportName: "Test report ${environment}",
             reportTitles: ''
