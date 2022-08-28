@@ -7,8 +7,8 @@ pipeline {
     stages {
         stage('build-app') {
             steps {
-                sh "docker build -t vjerihova/hello-app:latest ."
-                sh "docker push vjerihova/hello-app:latest"
+                sh "docker build -t vjerihova/hello-app:${GIT_COMMIT} ."
+                sh "docker push vjerihova/hello-app:${GIT_COMMIT}"
             }
         }
         stage('deploy-dev') {
